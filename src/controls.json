@@ -1,0 +1,181 @@
+[
+  {
+    "type": "text",
+    "content": "Tutorial bot",
+    "style": "header"
+  },
+  {
+    "type": "text",
+    "content": "Below you will find several diffent methods for determining the next move of your bot. Or in other words, in which column the next disc will be placed. It's up to you to determine in which order the different methods should be executed. The bot will cycle through the methods from highest priority to lowest and if the method can be executed the bot will perform that move, or otherwise try a lower priority method. Note that methods of equal priority will be selected in random order.",
+    "style": "description"
+  },
+  {
+    "type": "text",
+    "content": "The two methods below are used for making random moves. One taking skips into account, the other doing fully random stuff.",
+    "style": "label"
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "doCompletelyRandomPrio",
+    "description": "Make a completely random move, not taking the skips into account.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "doRandomWithSkipsPrio",
+    "description": "Make a random move, taking the skips into account.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "type": "text",
+    "content": "These methods are pretty simple, they will just try to place the disc in a certain column each time.",
+    "style": "label"
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "getLeftSideColumnPrio",
+    "description": "Place the disc in the left-most column (x=0).",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "getXis1ColumnPrio",
+    "description": "Place the disc in the column x=1.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "getXis2ColumnPrio",
+    "description": "Place the disc in the column x=2.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "getCenterColumnPrio",
+    "description": "Place the disc in the center column (x=3).",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "getXis4ColumnPrio",
+    "description": "Place the disc in the column x=4.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "getXis5ColumnPrio",
+    "description": "Place the disc in the column x=5.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "getRightSideColumnPrio",
+    "description": "Place the disc in the right-most column (x=6).",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "type": "text",
+    "content": "These three methods below will try to place the disc in such a way that rows are created for your bot.",
+    "style": "label"
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "getFourInARowPrio",
+    "description": "If there is a possibility to create 4 in a row, make that move.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "getMultipleThreeInARowPrio",
+    "description": "If there is a possibility to create two or more 3 in a row with a single disc, make that move.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "getThreeInARowPrio",
+    "description": "If there is a possibility to create 3 in a row, make that move.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "type": "text",
+    "content": "The three methods below are about blocking the opponent. If the opponent is able to get a row on the next turn, your bot will place a disc there instead.",
+    "style": "label"
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "blockFourInARowPrio",
+    "description": "If the opponent can get 4 in a row on the next turn, block it by placing the disc there.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "blockMultipleThreeInARowPrio",
+    "description": "If the opponent can get two or more 3 in a row on the next turn, block it by placing the disc there.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "blockThreeInARowPrio",
+    "description": "If the opponent can get 3 in a row on the next turn, block it by placing the disc there.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "type": "text",
+    "content": "The three methods below are special methods called 'skips'. If the bot has found a move using one of the methods above, the bot might want to still skip using that move under certain conditions, for instance if it enables the opponent to win on the next turn. The priority level determines on which methods the skips will and will not be used. All methods above with higher priotity levels than the skips will not be skipped, all methods with lower priority than a skip, will be skipped when that condition is met.",
+    "style": "label"
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "skipOnOpponentFourInARowPrio",
+    "description": "If this move enables the opponent to get 4 in a row on the next turn, skip it.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "skipOnOpponentMultipleThreeInARowPrio",
+    "description": "If this move enables the opponent to get multiple 3 in a row on the next turn, skip it.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  },
+  {
+    "file": "bot/BotStarter.java",
+    "variable": "skipOnOpponentThreeInARowPrio",
+    "description": "If this move enables the opponent to get 3 in a row on the next turn, skip it.",
+    "type": "slider",
+    "min": 0,
+    "max": 100
+  }
+]
