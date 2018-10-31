@@ -1,5 +1,7 @@
 package board;
 
+import java.util.Arrays;
+
 public class Settings {
     private Integer timebank;
     private Integer timePerMove;
@@ -12,29 +14,21 @@ public class Settings {
     private Integer fieldHeight;
 
     public void parseSettingsString(String[] inputArray) {
-        switch (inputArray[1]) {
-            case "timebank" : {
-                timebank = Integer.parseInt(inputArray[2]);
-            }
-            case "time_per_move" : {
-                timePerMove = Integer.parseInt(inputArray[2]);
-            }
-            case "player_names" : {
-                String arrayString = inputArray[2].replace("]", "").replace("[", "");
-                playerNames = arrayString.split(",");
-            }
-            case "your_bot" : {
-                myBotName = inputArray[2];
-            }
-            case "your_botid" : {
-                myBotId = Integer.parseInt(inputArray[2]);
-            }
-            case "field_width" : {
-                fieldWidth = Integer.parseInt(inputArray[2]);
-            }
-            case "field_height" : {
-                fieldHeight = Integer.parseInt(inputArray[2]);
-            }
+        if (inputArray[1].equalsIgnoreCase("timebank")) {
+            timebank = Integer.parseInt(inputArray[2]);
+        } else if (inputArray[1].equalsIgnoreCase("time_per_move")) {
+            timePerMove = Integer.parseInt(inputArray[2]);
+        } else if (inputArray[1].equalsIgnoreCase("player_names")) {
+            String arrayString = inputArray[2].replace("]", "").replace("[", "");
+            playerNames = arrayString.split(",");
+        } else if (inputArray[1].equalsIgnoreCase("your_bot")) {
+            myBotName = inputArray[2];
+        } else if (inputArray[1].equalsIgnoreCase("your_botid")) {
+            myBotId = Integer.parseInt(inputArray[2]);
+        } else if (inputArray[1].equalsIgnoreCase("field_width")) {
+            fieldWidth = Integer.parseInt(inputArray[2]);
+        } else if (inputArray[1].equalsIgnoreCase("field_height")) {
+            fieldHeight = Integer.parseInt(inputArray[2]);
         }
     }
 

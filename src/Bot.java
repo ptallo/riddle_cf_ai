@@ -15,12 +15,14 @@ public class Bot {
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
 
-            if (line.length() == 0) continue;
+            System.err.println("PARSING DATA: " + line);
+            System.err.flush();
 
+            if (line.length() == 0) continue;
             String[] parts = line.split(" ");
+
             if (parts[0].equalsIgnoreCase("settings")) {
                 settings.parseSettingsString(parts);
-                break;
             } else if (parts[0].equalsIgnoreCase("update")) {
                 if (game == null) {
                     game = settings.getNewGame();
@@ -42,6 +44,7 @@ public class Bot {
     }
 
     public static void main(String[] args) {
-        (new Bot()).run();
+        Bot myBot = new Bot();
+        myBot.run();
     }
 }
