@@ -30,13 +30,13 @@ public class Bot {
                 if (parts[2].equalsIgnoreCase("round")) {
                     game.setRoundNumber(Integer.parseInt(parts[3]));
                 } else if (parts[2].equalsIgnoreCase("field")) {
-                    game.updateGame(parts[3]);
+                    game.updateGameFromEngine(parts[3]);
                 }
             } else if (parts[0].equalsIgnoreCase("action")) {
                 if (game == null) {
                     game = settings.getNewGame();
                 }
-                game.makeMove(Integer.parseInt(parts[2]));
+                game.chooseMove(Math.toIntExact(System.currentTimeMillis()), Integer.parseInt(parts[2]));
             } else {
                 throw new RuntimeException("default statement reached!");
             }
