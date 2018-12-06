@@ -8,7 +8,7 @@ public class Settings {
 
     private String[] playerNames;
     private String myBotName;
-    private Integer myBotId;
+    private BotID myBotId;
 
     private Integer fieldWidth;
     private Integer fieldHeight;
@@ -24,7 +24,12 @@ public class Settings {
         } else if (inputArray[1].equalsIgnoreCase("your_bot")) {
             myBotName = inputArray[2];
         } else if (inputArray[1].equalsIgnoreCase("your_botid")) {
-            myBotId = Integer.parseInt(inputArray[2]);
+            int botId = Integer.parseInt(inputArray[2]);
+            if (botId == 0) {
+                myBotId = BotID.ZERO;
+            } else {
+                myBotId = BotID.ONE;
+            }
         } else if (inputArray[1].equalsIgnoreCase("field_width")) {
             fieldWidth = Integer.parseInt(inputArray[2]);
         } else if (inputArray[1].equalsIgnoreCase("field_height")) {
@@ -40,7 +45,7 @@ public class Settings {
         }
     }
 
-    public Integer getMyBotId() {
+    public BotID getMyBotId() {
         return myBotId;
     }
 

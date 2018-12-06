@@ -1,4 +1,5 @@
 import board.Game;
+import board.GameWrapper;
 import board.Settings;
 
 import java.util.Scanner;
@@ -28,17 +29,22 @@ public class Bot {
                     game = settings.getNewGame();
                 }
                 if (parts[2].equalsIgnoreCase("round")) {
-                    game.setRoundNumber(Integer.parseInt(parts[3]));
+                    int newRoundNumber = Integer.parseInt(parts[3]);
+                    if (game.getRoundNumber() != newRoundNumber || game.getRoundNumber() + 1 != newRoundNumber) {
+                        throw new RuntimeException("Rounds out of sync, please stop game!");
+                    }
                 } else if (parts[2].equalsIgnoreCase("field")) {
-                    game.updateGameFromEngine(parts[3]);
+                    String boardArray = parts[3];
+                    GameWrapper.parseInputFromEngine(game, boardArray);
                 }
             } else if (parts[0].equalsIgnoreCase("action")) {
                 if (game == null) {
                     game = settings.getNewGame();
                 }
-                game.chooseMove(Math.toIntExact(System.currentTimeMillis()), Integer.parseInt(parts[2]));
+                long millisecondsLeft = Long.parseLong(parts[2]);
+                GameWrapper.getBotMove(game, System.currentTimeMillis() + millisecondsLeft);
             } else {
-                throw new RuntimeException("default statement reached!");
+                throw new RuntimeException("undefined engine input! Please examin faulty input!");
             }
         }
     }

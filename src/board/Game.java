@@ -62,4 +62,16 @@ public class Game {
     public boolean columnIsFull(int column) {
         return !board[0][column].contains(".");
     }
+
+    public int getRoundNumber() {
+        return roundNumber;
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public String[][] getBoard() {
+        return board;
+    }
 }

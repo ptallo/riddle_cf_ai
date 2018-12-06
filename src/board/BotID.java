@@ -13,4 +13,12 @@ public enum BotID {
     public String getId() {
         return id;
     }
+
+    public BotID getOtherBotId(BotID id) {
+        if (id == BotID.ZERO) {
+            return BotID.ONE;
+        } else {
+            return BotID.ZERO;
+        }
+    }
 }
