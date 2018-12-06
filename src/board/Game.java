@@ -1,7 +1,5 @@
 package board;
 
-import search.MinMaxSearch;
-
 import java.util.ArrayList;
 
 public class Game {
@@ -30,55 +28,18 @@ public class Game {
         return new Game(settings, roundNumber, board);
     }
 
-    public void setRoundNumber(int roundNumber) {
+    public void makeMove(BotID id, int column) {
+        if (column < 0 || column > board[0].length || !getLegalMoves().contains(column)) {
+            throw new RuntimeException("Invalid Column chosen for move!");
+        }
+
         this.roundNumber++;
-        if (this.roundNumber != roundNumber) {
-            throw new RuntimeException("Missing rounds please examine input");
-        }
-    }
-
-    public void updateGameFromEngine(String updateArray) {
-        updateArray = updateArray.replace("[", "").replace("]", "");
-        String[] items = updateArray.split(",");
-        for (int i = 0; i < items.length; i++) {
-            Integer fieldWidth = settings.getFieldWidth();
-            int row = Math.floorDiv(i, fieldWidth);
-            int column = i % fieldWidth;
-            board[row][column] = items[i];
-        }
-    }
-
-    public void updateGameFromBot(int columnNumber) {
-        for (int rowNum = board.length - 1; rowNum >= 0; rowNum--) {
-            if (board[rowNum][columnNumber].equalsIgnoreCase(".")) {
-                board[rowNum][columnNumber] = String.valueOf(settings.getMyBotId());
+        for (int i = board.length; i >= 0; i--) {
+            if (board[i][column].contains(".")) {
+                board[i][column] = id.getId();
+                break;
             }
         }
-    }
-
-    public void chooseMove(int startTime, int time) {
-        // should sout place_disc i - where i is the number of the column where you wish to make your moves
-        MinMaxSearch search = new MinMaxSearch();
-        int move = search.search(Math.toIntExact(time - Math.abs(startTime - System.currentTimeMillis())), this);
-
-        System.err.format("place_disc %d", move);
-        System.err.flush();
-
-        System.out.println("place_disc " + move);
-        System.out.flush();
-    }
-
-    public ArrayList<Game> getChildren() {
-        ArrayList<Game> children = new ArrayList<>();
-
-        ArrayList<Integer> legalMoves = getLegalMoves();
-        for (Integer move : legalMoves) {
-            Game child = this.clone();
-            child.updateGameFromBot(move);
-            children.add(child);
-        }
-
-        return children;
     }
 
     public ArrayList<Integer> getLegalMoves() {
@@ -99,14 +60,6 @@ public class Game {
     }
 
     public boolean columnIsFull(int column) {
-        for (String[] row : board) {
-            for (int i = 0; i < row.length; i++) {
-                int c = i % row.length;
-                if (c == column && row[i].equalsIgnoreCase(".")) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return !board[0][column].contains(".");
     }
 }
